@@ -1,0 +1,50 @@
+header {
+    background-color:tan;
+    display: flex;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    height: 40px;
+    align-items: center;
+    box-shadow: 0 0 25px 0 black;
+}
+header *{
+    display:inline;
+}
+header li {
+    margin: 20px;
+}
+header li, header li a{
+    color: gold;
+    text-decoration: none;
+}
+
+body {
+    font-family: sans-serif;
+    margin-top: 80px;
+    padding: 30px;
+    height:100%
+
+
+}
+
+/* .npc-form-container {
+
+} */
+.npc-form-label {
+    color:brown;
+    display: inline;
+}
+#character-name {
+    text-align:center;
+}
+.npc-display {
+    margin-top: 100px;
+
+    justify-content: center;
+}
+.npc-stats-display {
+    /* margin-top: 100px; */
+    align-items:center;
+}

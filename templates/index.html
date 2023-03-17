@@ -4,9 +4,72 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Home Page</title>
+    <link rel="stylesheet" href="/static/base.css" />
+    <title>Pathfinder 2e NPC Generator</title>
   </head>
   <body>
-    <h1>Testing</h1>
+    <header class="navbar-container">
+      <nav class="nav-bar">
+        <ul>
+          {% if g.user %}
+          <li>Welcome, {{g.user.username}}!</li>
+          <li><a href="/logout">Log Out</a></li>
+          {% else %}
+          <li><a href="/login">Log In</a></li>
+          <li><a href="/signup">Sign Up</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+    {% for category, message in get_flashed_messages(with_categories=True) %}
+    <div class="flash-message">{{ message }}</div>
+    {% endfor %} {% block content %}
+    <main>
+      <h1>Hello</h1>
+      {% if not g.user %}
+      <p>Please log in to save characters.</p>
+      {% endif %}
+      <div class="npc-form-container">
+        <form class="npc-form">
+          {{form.hidden_tag()}} {% for field in form if field.widget.input_type
+          != 'hidden' %}
+          <p class="npc-form-label">
+            {{field.label}} {{field}} {% for error in field.errors %} {{error}}
+            {% endfor %}
+          </p>
+          {% endfor %}
+        </form>
+      </div>
+
+      <div class="npc-display">
+        <h2 id="character-name">Character Name</h2>
+        <div class="npc-stats-display">
+          <ul class="npc-display-stats" id="main-details">
+            <li>Background</li>
+            <li>Ancestry</li>
+            <li>Char_class</li>
+            <li>Level</li>
+          </ul>
+          <ul class="npc-display-stats" id="stats">
+            <li>Str</li>
+            <li>Con</li>
+            <li>Wis</li>
+            <li>Dex</li>
+            <li>Int</li>
+            <li>Cha</li>
+          </ul>
+          <ul class="npc-display-stats" id="feats"></ul>
+        </div>
+      </div>
+      <!-- <div class="npc-groups">
+      <ul class="group-name">
+        <li class="npc-name"></li>
+      </ul>
+    </div> -->
+      {% endblock %}
+      <script src="https://unpkg.com/axios/dist/axios.js"></script>
+      <script src="/static/pf2e.js"></script>
+      <script src="/static/functions.js:"></script>
+    </main>
   </body>
 </html>

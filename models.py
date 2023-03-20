@@ -67,21 +67,44 @@ class Character(db.Model):
 
     level = db.Column(db.Integer)
 
-    strength = db.Column(db.Integer)
-    con = db.Column(db.Integer)
-    wis = db.Column(db.Integer)
-    dex = db.Column(db.Integer)
-    intel = db.Column(db.Integer)
-    cha = db.Column(db.Integer)
+    strength = db.Column(db.Integer,default="10")
+    con = db.Column(db.Integer,default="10")
+    wis = db.Column(db.Integer,default="10")
+    dex = db.Column(db.Integer,default="10")
+    intel = db.Column(db.Integer,default="10")
+    cha = db.Column(db.Integer,default="10")
 
     ancestry_feats = db.Column(db.Text)
     class_feats = db.Column(db.Text)
 
-    spells = db.Column(db.Text)
+    spells = db.Column(db.Text,default="None")
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
     user = db.relationship(User, backref="characters")
+
+    def serialize_character(self):
+        return {
+            "name" : self.name
+            "background" : self.background
+            "ancestry" : self.ancestry
+            "char_class" : self.char_class
+
+            "level" : self.level
+
+            "strength" : self.strength
+            "con":self.con
+            "wis" : self.wis
+            "dex" : self.dex
+            "intel" : self.intel
+            "cha" : self.cha
+
+            "ancestry_feats" : self.ancestry_feats
+            "class_feats" : self.class_feats
+
+            "user_id" : self.user_id
+        }
+
 
 
 class Group(db.Model):

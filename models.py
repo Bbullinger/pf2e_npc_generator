@@ -60,24 +60,24 @@ class Character(db.Model):
     ___tablename__ = "characters"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text)
+    name = db.Column(db.Text, default="Unnamed")
     background = db.Column(db.Text)
     ancestry = db.Column(db.Text)
     char_class = db.Column(db.Text)
 
     level = db.Column(db.Integer)
 
-    strength = db.Column(db.Integer,default="10")
-    con = db.Column(db.Integer,default="10")
-    wis = db.Column(db.Integer,default="10")
-    dex = db.Column(db.Integer,default="10")
-    intel = db.Column(db.Integer,default="10")
-    cha = db.Column(db.Integer,default="10")
+    strength = db.Column(db.Integer, default="10")
+    con = db.Column(db.Integer, default="10")
+    wis = db.Column(db.Integer, default="10")
+    dex = db.Column(db.Integer, default="10")
+    intel = db.Column(db.Integer, default="10")
+    cha = db.Column(db.Integer, default="10")
 
     ancestry_feats = db.Column(db.Text)
     class_feats = db.Column(db.Text)
 
-    spells = db.Column(db.Text,default="None")
+    spells = db.Column(db.Text, default="None")
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
@@ -85,26 +85,21 @@ class Character(db.Model):
 
     def serialize_character(self):
         return {
-            "name" : self.name
-            "background" : self.background
-            "ancestry" : self.ancestry
-            "char_class" : self.char_class
-
-            "level" : self.level
-
-            "strength" : self.strength
-            "con":self.con
-            "wis" : self.wis
-            "dex" : self.dex
-            "intel" : self.intel
-            "cha" : self.cha
-
-            "ancestry_feats" : self.ancestry_feats
-            "class_feats" : self.class_feats
-
-            "user_id" : self.user_id
+            "name": self.name,
+            "background": self.background,
+            "ancestry": self.ancestry,
+            "char_class": self.char_class,
+            "level": self.level,
+            "strength": self.strength,
+            "con": self.con,
+            "wis": self.wis,
+            "dex": self.dex,
+            "intel": self.intel,
+            "cha": self.cha,
+            "ancestry_feats": self.ancestry_feats,
+            "class_feats": self.class_feats,
+            "user_id": self.user_id,
         }
-
 
 
 class Group(db.Model):

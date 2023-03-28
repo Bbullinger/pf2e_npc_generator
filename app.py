@@ -56,6 +56,7 @@ def home_page():
             ancestry_feats=form.ancestry_feats.data,
             class_feats=form.class_feats.data,
             spells=form.spells.data,
+            user_id=g.user.id,
         )
         print("***************************WORKING**********************")
         db.session.add(character)

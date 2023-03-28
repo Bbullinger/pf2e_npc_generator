@@ -30,7 +30,7 @@
       <p>Please log in to save characters.</p>
       {% endif %}
       <div class="npc-form-container">
-        <form class="npc-form">
+        <form class="npc-form" method="POST">
           {{form.hidden_tag()}} {% for field in form if field.widget.input_type
           != 'hidden' %}
           <p class="npc-form-label">
@@ -43,11 +43,13 @@
             id="generate-character"
             type="reset|button"
           >
-            Generate Character</button
-          >{% if g.user %}
+            Generate Character
+          </button>
+          {% if g.user %}
           <button class="form-button" type="submit">Save</button>
           {% endif %}
         </form>
+
         <!-- <form class="save-form" action="/">
           <button class="save-submit" action=""
         </form> -->

@@ -17,9 +17,13 @@ async function randomAPI(endpoint) {
   const numResults = response.data.results.length;
   return response.data.results[randomNumber(numResults)].name;
 }
+async function endpointAPI(endpoint) {
+  const response = await axios.get(`${BASE_URL}/${endpoint}`);
+  return response.data.results;
+}
 
-//Allow user to randomize form elements not manually filled in. This function pulls data
-//From the pf2e api as well as offers random numbers for stats (from 8-14)
+//This function pulls data from the pf2e api as well as offers random numbers for stats (from 8-14)
+
 async function randomizeNpcForm() {
   // Spells and Name excluded in form auto fill, as they are optional
   const formAPIValues = [
@@ -30,18 +34,16 @@ async function randomizeNpcForm() {
     generatorClassFeats,
   ];
   for (let formInput of formAPIValues) {
-    if (formInput.value.length === 0) {
-      //Form is created using wtf-forms in a python file. Some python variable naming
-      //conventions conflict with API endpoints names, these if statements are a work around
-      if (formInput === generatorClass) {
-        formInput.value = await randomAPI("class");
-      } else if (formInput === generatorAncestryFeats) {
-        formInput.value = await randomAPI("ancestryFeature");
-      } else if (formInput === generatorClassFeats) {
-        formInput.value = await randomAPI("classFeature");
-      } else {
-        formInput.value = await randomAPI(formInput.name);
-      }
+    //Form is created using wtf-forms in a python file. Some python variable naming
+    //conventions conflict with API endpoints names, these if statements are a work around
+    if (formInput === generatorClass) {
+      formInput.value = await randomAPI("class");
+    } else if (formInput === generatorAncestryFeats) {
+      formInput.value = await randomAPI("ancestryFeature");
+    } else if (formInput === generatorClassFeats) {
+      formInput.value = await randomAPI("classFeature");
+    } else {
+      formInput.value = await randomAPI(formInput.name);
     }
   }
 
@@ -55,12 +57,8 @@ async function randomizeNpcForm() {
     generatorCha,
   ];
   for (let formInput of formStatsValues) {
-    if (formInput.value.length === 0) {
-      //Want the values to be between 8 and 14. Base set at 8, function adds 0 to 6
-      formInput.value = randomNumber(6) + 8;
-    }
+    //Want the values to be between 8 and 14. Base set at 8, function adds 0 to 6
+    formInput.value = randomNumber(6) + 8;
   }
-  if (generatorLevel.value.length === 0) {
-    generatorLevel.value = randomNumber(20);
-  }
+  generatorLevel.value = randomNumber(20);
 }

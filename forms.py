@@ -21,7 +21,7 @@ class LoginForm(FlaskForm):
 class NpcGenerator(FlaskForm):
     """Form for generating the random character"""
 
-    name = StringField("Name", validators=[InputRequired()])
+    name = StringField("Name")
     background = StringField("Background")
     ancestry = StringField("Ancestry")
     char_class = StringField("Class")

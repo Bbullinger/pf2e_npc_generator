@@ -1,10 +1,15 @@
 import os
+from random import randint
+import requests
+from dotenv import load_dotenv
 
-API_KEY = os.environ.get("PF2_API_KEY")
-BASE_URL = "https://api.pathfinder2.fr/v1/"
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
+BASE_URL = "https://api.pathfinder2.fr/v1/pf2/"
 CURR_USER_KEY = "curr_user"
 
-from flask import Flask, render_template, request, flash, redirect, session, g
+from flask import Flask, render_template, request, flash, redirect, session, g, jsonify
 from sqlalchemy.exc import IntegrityError
 
 from models import User, Character, Group, db, app
@@ -30,7 +35,7 @@ def logout():
         del session[CURR_USER_KEY]
 
 
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 def home_page():
     """Present character form to user"""
     form = NpcGenerator()
@@ -52,6 +57,7 @@ def home_page():
             class_feats=form.class_feats.data,
             spells=form.spells.data,
         )
+        print("***************************WORKING**********************")
         db.session.add(character)
         db.session.commit()
         flash("Character added to roster.")
@@ -59,6 +65,9 @@ def home_page():
     return render_template("index.html", form=form)
 
 
+@app.route("/add_character")
+
+################USER LOG IN/SIGN UP ROUTES############################
 @app.route("/signup", methods=["GET", "POST"])
 def user_signup():
     """Allow user to sign up, create new user and add to database.
@@ -109,6 +118,13 @@ def user_sign_in():
             return redirect("/")
         else:
             flash("Invalid credentials.", "danger")
-            return redirect("/login")
+            return render_template("login.html", form=form)
     else:
         return render_template("login.html", form=form)
+
+
+######Retrieve info from the API###########
+@app.route("/<endpoint>")
+def randomAPI(endpoint):
+    response = requests.get(BASE_URL + endpoint, headers={"Authorization": API_KEY})
+    return response.text

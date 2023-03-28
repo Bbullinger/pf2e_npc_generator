@@ -1,13 +1,15 @@
 {% extends 'index.html' %} {% block content %}
-<h2 class="title">Log in to access your saved characters.</h2>
-<div class="form-container">
-  <form method="POST" id="user-signup">
-    {{ form.hidden_tag()}} {% for field in form if field.widget.input_type !=
-    'hidden' %} {% for error in field.errors %}
-    <span class="error"> {{ error }} </span>
-    {% endfor %} {{ field(placeholder=field.label.text, class="form-input") }}
-    {% endfor %}
-    <button class="login-btn">Log in</button>
-  </form>
-</div>
+<main data-page="login">
+  <h2 class="title">Log in to access your saved characters.</h2>
+  <div class="form-container">
+    <form method="POST" id="user-signup">
+      {{ form.hidden_tag()}} {% for field in form if field.widget.input_type !=
+      'hidden' %} {% for error in field.errors %}
+      <span class="error"> {{ error }} </span>
+      {% endfor %} {{ field(placeholder=field.label.text, class="form-input") }}
+      {% endfor %}
+      <button class="login-btn">Log in</button>
+    </form>
+  </div>
+</main>
 {% endblock %}

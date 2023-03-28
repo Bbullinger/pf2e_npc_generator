@@ -24,8 +24,8 @@
     {% for category, message in get_flashed_messages(with_categories=True) %}
     <div class="flash-message">{{ message }}</div>
     {% endfor %} {% block content %}
-    <main>
-      <h1>Hello</h1>
+    <main data-page="home">
+      <h1>Randomly Generate a Pathfinder 2e character!</h1>
       {% if not g.user %}
       <p>Please log in to save characters.</p>
       {% endif %}
@@ -38,8 +38,19 @@
             {% endfor %}
           </p>
           {% endfor %}
-          <button class="form-submit" type="submit">Generate Character</button>
+          <button
+            class="form-button"
+            id="generate-character"
+            type="reset|button"
+          >
+            Generate Character</button
+          >{% if g.user %}
+          <button class="form-button" type="submit">Save</button>
+          {% endif %}
         </form>
+        <!-- <form class="save-form" action="/">
+          <button class="save-submit" action=""
+        </form> -->
       </div>
 
       <div class="npc-display">
@@ -68,9 +79,12 @@
       </ul>
     </div> -->
       {% endblock %}
-      <script src="https://unpkg.com/axios/dist/axios.js"></script>
-      <script src="/static/pf2e.js"></script>
-      <script src="/static/functions.js:"></script>
     </main>
+    <script src="https://unpkg.com/axios/dist/axios.js"></script>
+
+    <script src="/static/domElements.js"></script>
+
+    <script src="/static/functions.js"></script>
+    <script src="/static/pf2e.js"></script>
   </body>
 </html>

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, IntegerField
+from wtforms import StringField, PasswordField, IntegerField, SubmitField
 from wtforms.validators import InputRequired, Email
 
 
@@ -21,10 +21,10 @@ class LoginForm(FlaskForm):
 class NpcGenerator(FlaskForm):
     """Form for generating the random character"""
 
-    name = StringField("Name")
-    background = StringField("Background")
-    ancestry = StringField("Ancestry")
-    char_class = StringField("Class")
+    name = StringField("Name", validators=[InputRequired()])
+    background = StringField("Background", validators=[InputRequired()])
+    ancestry = StringField("Ancestry", validators=[InputRequired()])
+    char_class = StringField("Class", validators=[InputRequired()])
 
     level = IntegerField("Level")
 
@@ -34,20 +34,22 @@ class NpcGenerator(FlaskForm):
     dex = IntegerField("Dex")
     intel = IntegerField("Int")
     cha = IntegerField("Cha")
+    save_button1 = SubmitField("Save")
 
-    ancestry_feats = StringField("Ancestry Feats")
-    class_feats = StringField("Class Feats")
+    # ancestry_feats = StringField("Ancestry Feats")
+    # class_feats = StringField("Class Feats")
 
-    spells = StringField("Spells")
+    # spells = StringField("Spells")
 
 
 #####Will need to revist how user adds character to a specific group. Should it be a form?
 
 
-class Group(FlaskForm):
+class GroupForm(FlaskForm):
     """Create a Group for NPCs to join"""
 
     group_name = StringField("Group Name", validators=[InputRequired()])
+    save_button2 = SubmitField("New")
 
 
 class JoinGroup(FlaskForm):

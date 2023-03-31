@@ -13,7 +13,7 @@ from flask import Flask, render_template, request, flash, redirect, session, g, 
 from sqlalchemy.exc import IntegrityError
 
 from models import User, Character, Group, db, app
-from forms import UserAddForm, LoginForm, NpcGenerator, Group, JoinGroup
+from forms import UserAddForm, LoginForm, NpcGenerator, GroupForm, JoinGroup
 
 
 @app.before_request
@@ -38,35 +38,66 @@ def logout():
 @app.route("/", methods=["GET", "POST"])
 def home_page():
     """Present character form to user"""
-    form = NpcGenerator()
+    npc_form = NpcGenerator()
+    group_form = GroupForm()
 
-    if form.validate_on_submit():
+    if npc_form.save_button1.data and npc_form.validate_on_submit():
         character = Character(
-            name=form.name.data,
-            background=form.background.data,
-            ancestry=form.ancestry.data,
-            char_class=form.char_class.data,
-            level=form.level.data,
-            strength=form.strength.data,
-            con=form.con.data,
-            wis=form.wis.data,
-            dex=form.dex.data,
-            intel=form.intel.data,
-            cha=form.cha.data,
-            ancestry_feats=form.ancestry_feats.data,
-            class_feats=form.class_feats.data,
-            spells=form.spells.data,
+            name=npc_form.name.data,
+            background=npc_form.background.data,
+            ancestry=npc_form.ancestry.data,
+            char_class=npc_form.char_class.data,
+            level=npc_form.level.data,
+            strength=npc_form.strength.data,
+            con=npc_form.con.data,
+            wis=npc_form.wis.data,
+            dex=npc_form.dex.data,
+            intel=npc_form.intel.data,
+            cha=npc_form.cha.data,
+            # ancestry_feats=form.ancestry_feats.data,
+            # class_feats=form.class_feats.data,
+            # spells=form.spells.data,
             user_id=g.user.id,
         )
-        print("***************************WORKING**********************")
         db.session.add(character)
         db.session.commit()
         flash("Character added to roster.")
         return redirect("/")
-    return render_template("index.html", form=form)
+
+    if group_form.save_button2.data and group_form.validate_on_submit():
+        group = Group(group_name=group_form.group_name.data, user_id=g.user.id)
+
+        db.session.add(group)
+        db.session.commit()
+        flash("Group added to list.")
+        return redirect("/")
+    if g.user:
+        groups = Group.query.filter(Group.user_id == g.user.id).all()
+        characters = Character.query.filter(Character.user_id == g.user.id).all()
+        return render_template(
+            "index.html",
+            npc_form=npc_form,
+            group_form=group_form,
+            groups=groups,
+            characters=characters,
+        )
+
+    return render_template("index.html", npc_form=npc_form, group_form=group_form)
 
 
-@app.route("/add_character")
+# @app.route("/add_group", methods=["POST"])
+# def add_group():
+#     form = Group()
+
+#     if form.validate_on_submit():
+#         print("***********GOT THIS FAR******************")
+#         group = Group(group_name=form.group_name.data, user_id=g.user.id)
+#         db.session.add(group)
+#         db.session.commit()
+#         flash("Group added to list.")
+#         return redirect("/")
+#     return render_template
+
 
 ################USER LOG IN/SIGN UP ROUTES############################
 @app.route("/signup", methods=["GET", "POST"])

@@ -26,16 +26,18 @@
     {% endfor %} {% block content %}
     <main data-page="home">
       <h1>Randomly Generate a Pathfinder 2e character!</h1>
-      {% if not g.user %}
-      <p>Please log in to save characters.</p>
-      {% endif %}
+
       <div class="npc-form-container">
         <form class="npc-form" method="POST">
-          {{form.hidden_tag()}} {% for field in form if field.widget.input_type
-          != 'hidden' %}
+          {{npc_form.hidden_tag()}} {% for field in npc_form if
+          field.widget.input_type != 'hidden' %}
           <p class="npc-form-label">
-            {{field.label}} {{field}} {% for error in field.errors %} {{error}}
-            {% endfor %}
+            <!-- Want to show only show 'save button' from form if user is logged in, otherwise all
+            other components of form display to user -->
+            {% if field.name != 'save_button1' %} {{field.label}}{% endif %} {%
+            if field.name != 'save_button1' %} {{field}} {% endif %} {% if
+            field.name == 'save_button1' and g.user %} {{field}} {% endif %} {%
+            for error in field.errors %} {{error}} {% endfor %}
           </p>
           {% endfor %}
           <button
@@ -45,41 +47,53 @@
           >
             Generate Character
           </button>
-          {% if g.user %}
-          <button class="form-button" type="submit">Save</button>
-          {% endif %}
         </form>
 
         <!-- <form class="save-form" action="/">
           <button class="save-submit" action=""
         </form> -->
       </div>
-
-      <div class="npc-display">
-        <h2 id="character-name">Character Name</h2>
-        <div class="npc-stats-display">
-          <ul class="npc-display-stats" id="main-details">
-            <li>Background</li>
-            <li>Ancestry</li>
-            <li>Char_class</li>
-            <li>Level</li>
+      <div class="npc-group-display">
+        <div class="npc-display">
+          <h2 id="character-name">Character Name</h2>
+          <div class="npc-stats-display">
+            <ul class="npc-display-stats" id="main-details">
+              <li>Background</li>
+              <li>Ancestry</li>
+              <li>Char_class</li>
+              <li>Level</li>
+            </ul>
+            <ul class="npc-display-stats" id="stats">
+              <li>Str</li>
+              <li>Con</li>
+              <li>Wis</li>
+              <li>Dex</li>
+              <li>Int</li>
+              <li>Cha</li>
+            </ul>
+            <ul class="npc-display-stats" id="feats"></ul>
+          </div>
+        </div>
+        <div class="group-display">
+          <h3>Groups</h3>
+          {% if g.user %}
+          <form class="group-form" method="POST">
+            {{group_form.hidden_tag()}} {% for field in group_form if
+            field.widget.input_type != 'hidden' %}
+            <p class="group-form-label">
+              {{field}} {% for error in field.errors %} {{error}} {% endfor %}
+            </p>
+            {% endfor %}
+          </form>
+          <ul class="group-name">
+            <li>test</li>
+            {% for character in characters %}
+            <li>{{character.name}}</li>
+            {% endfor %}
           </ul>
-          <ul class="npc-display-stats" id="stats">
-            <li>Str</li>
-            <li>Con</li>
-            <li>Wis</li>
-            <li>Dex</li>
-            <li>Int</li>
-            <li>Cha</li>
-          </ul>
-          <ul class="npc-display-stats" id="feats"></ul>
+          {% endif %}
         </div>
       </div>
-      <!-- <div class="npc-groups">
-      <ul class="group-name">
-        <li class="npc-name"></li>
-      </ul>
-    </div> -->
       {% endblock %}
     </main>
     <script src="https://unpkg.com/axios/dist/axios.js"></script>

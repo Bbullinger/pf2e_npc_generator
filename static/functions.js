@@ -30,18 +30,18 @@ async function randomizeNpcForm() {
     generatorBackground,
     generatorAncestry,
     generatorClass,
-    generatorAncestryFeats,
-    generatorClassFeats,
+    // generatorAncestryFeats,
+    // generatorClassFeats,
   ];
   for (let formInput of formAPIValues) {
     //Form is created using wtf-forms in a python file. Some python variable naming
     //conventions conflict with API endpoints names, these if statements are a work around
     if (formInput === generatorClass) {
       formInput.value = await randomAPI("class");
-    } else if (formInput === generatorAncestryFeats) {
-      formInput.value = await randomAPI("ancestryFeature");
-    } else if (formInput === generatorClassFeats) {
-      formInput.value = await randomAPI("classFeature");
+      // } else if (formInput === generatorAncestryFeats) {
+      //   formInput.value = await randomAPI("ancestryFeature");
+      // } else if (formInput === generatorClassFeats) {
+      //   formInput.value = await randomAPI("classFeature");
     } else {
       formInput.value = await randomAPI(formInput.name);
     }

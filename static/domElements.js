@@ -13,9 +13,9 @@ const generatorDex = document.querySelector("#dex");
 const generatorInt = document.querySelector("#intel");
 const generatorCha = document.querySelector("#cha");
 
-const generatorAncestryFeats = document.querySelector("#ancestry_feats");
-const generatorClassFeats = document.querySelector("#class_feats");
-const generatorSpells = document.querySelector("#spells");
+// const generatorAncestryFeats = document.querySelector("#ancestry_feats");
+// const generatorClassFeats = document.querySelector("#class_feats");
+// const generatorSpells = document.querySelector("#spells");
 
 const generateCharacter = document.querySelector("#generate-character");
 

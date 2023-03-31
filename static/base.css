@@ -28,10 +28,13 @@ body {
 
 
 }
-
-/* .npc-form-container {
-
-} */
+h1 {
+    text-align: center;
+}
+/* CHARACTER GENERATOR FORM */
+.npc-form-container {
+    margin-top:50px;
+} 
 .npc-form-label {
     color:brown;
     display: inline;
@@ -39,12 +42,28 @@ body {
 #character-name {
     text-align:center;
 }
-.npc-display {
-    margin-top: 100px;
 
-    justify-content: center;
-}
 .npc-stats-display {
     /* margin-top: 100px; */
     align-items:center;
+}
+
+/* display of character name and Groups divs */
+.npc-group-display {
+    display: flex;
+    position:fixed;
+    /* align-items: stretch; */
+    width:100%
+}
+.npc-display, .group-display {
+    margin-top: 100px;
+}
+.group-display {
+    position:fixed;
+    margin-right: 100px;
+    right: 0px;
+    height:100;
+}
+.group-form-label {
+    display:inline;
 }

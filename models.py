@@ -74,10 +74,10 @@ class Character(db.Model):
     intel = db.Column(db.Integer, default="10")
     cha = db.Column(db.Integer, default="10")
 
-    ancestry_feats = db.Column(db.Text)
-    class_feats = db.Column(db.Text)
+    # ancestry_feats = db.Column(db.Text)
+    # class_feats = db.Column(db.Text)
 
-    spells = db.Column(db.Text, default="None")
+    # spells = db.Column(db.Text, default="None")
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 
@@ -96,8 +96,8 @@ class Character(db.Model):
             "dex": self.dex,
             "intel": self.intel,
             "cha": self.cha,
-            "ancestry_feats": self.ancestry_feats,
-            "class_feats": self.class_feats,
+            # "ancestry_feats": self.ancestry_feats,
+            # "class_feats": self.class_feats,
             "user_id": self.user_id,
         }
 
@@ -108,10 +108,10 @@ class Group(db.Model):
     __tablename__ = "groups"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    name = db.Column(db.Text, nullable=False)
+    group_name = db.Column(db.Text, nullable=False)
 
     ##Why does this only work if 'character' and not 'characters'?
-    character_id = db.Column(db.Integer, db.ForeignKey("character.id"), nullable=False)
+    character_id = db.Column(db.Integer, db.ForeignKey("character.id"))
 
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
 

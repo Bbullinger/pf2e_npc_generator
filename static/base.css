@@ -19,25 +19,81 @@ header li, header li a{
     color: gold;
     text-decoration: none;
 }
-
+/* html {
+    height:100%;
+} */
 body {
     font-family: sans-serif;
+    /* height:100%; */
     margin-top: 80px;
     padding: 30px;
-    height:100%
-
-
+    background-color: rgb(254, 224, 183);
 }
 h1 {
+    color:rgb(150, 49, 24);
     text-align: center;
 }
 /* CHARACTER GENERATOR FORM */
 .npc-form-container {
+
     margin-top:50px;
-} 
+    height: 250px;
+    width:915px;
+    margin: auto;
+    
+    
+}
+.npc-form {
+    height:100%;
+    margin-top:50px;
+    display: grid;
+    grid-template-columns: 300px 300px 300px;
+    justify-items:end;
+    align-items:center;
+    background-color:  rgb(214, 185, 142);
+
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px 0 black;
+}
+.name-container {
+    grid-row: 1/1;
+    grid-column: 1/1;
+}
+#background-container {
+    grid-row: 2/2;
+    grid-column: 1/1;
+}
+#ancestry-container {
+    grid-row: 3/3;
+    grid-column: 1/1;
+}
+#char_class-container{
+    grid-row: 4/4;
+    grid-column: 1/1;
+}
+#level-container {
+    grid-row: 5/5;
+    grid-column: 1/1;
+}
+#save_button1-container {
+    grid-row:5/5;
+    grid-column: 3/3;
+    
+}
+#save_button1 {
+    width:125px;
+}
+#generate-character {
+    grid-row: 5/5;
+    grid-column: 2/2;
+    width:125px;
+
+}
+
 .npc-form-label {
-    color:brown;
-    display: inline;
+    color:rgb(150, 49, 24);
+
+    font-weight:bold;
 }
 #character-name {
     text-align:center;
@@ -47,19 +103,23 @@ h1 {
     /* margin-top: 100px; */
     align-items:center;
 }
+.npc-form input {
+    height: 1.5rem;
+    border-radius: 5px;
+
+}
 
 /* display of character name and Groups divs */
 .npc-group-display {
     display: flex;
-    position:fixed;
-    /* align-items: stretch; */
+    /* position:fixed; */
     width:100%
 }
 .npc-display, .group-display {
     margin-top: 100px;
 }
 .group-display {
-    position:fixed;
+    /* position:fixed; */
     margin-right: 100px;
     right: 0px;
     height:100;

@@ -16,9 +16,12 @@ async function randomAPI(endpoint) {
 
   const numResults = response.data.results.length;
   return response.data.results[randomNumber(numResults)].name;
+  // const numResults = response.length;
+  // return response[randomNumber(numResults)].name;
 }
 async function endpointAPI(endpoint) {
   const response = await axios.get(`${BASE_URL}/${endpoint}`);
+  console.log(response);
   return response.data.results;
 }
 

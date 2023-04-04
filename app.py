@@ -71,32 +71,8 @@ def home_page():
         db.session.commit()
         flash("Group added to list.")
         return redirect("/")
-    if g.user:
-        groups = Group.query.filter(Group.user_id == g.user.id).all()
-        characters = Character.query.filter(Character.user_id == g.user.id).all()
-        return render_template(
-            "index.html",
-            npc_form=npc_form,
-            group_form=group_form,
-            groups=groups,
-            characters=characters,
-        )
 
     return render_template("index.html", npc_form=npc_form, group_form=group_form)
-
-
-# @app.route("/add_group", methods=["POST"])
-# def add_group():
-#     form = Group()
-
-#     if form.validate_on_submit():
-#         print("***********GOT THIS FAR******************")
-#         group = Group(group_name=form.group_name.data, user_id=g.user.id)
-#         db.session.add(group)
-#         db.session.commit()
-#         flash("Group added to list.")
-#         return redirect("/")
-#     return render_template
 
 
 ################USER LOG IN/SIGN UP ROUTES############################

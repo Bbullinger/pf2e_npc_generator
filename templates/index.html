@@ -31,14 +31,14 @@
         <form class="npc-form" method="POST">
           {{npc_form.hidden_tag()}} {% for field in npc_form if
           field.widget.input_type != 'hidden' %}
-          <p class="npc-form-label">
+          <div class="npc-form-label" id="{{field.name}}-container">
             <!-- Want to show only show 'save button' from form if user is logged in, otherwise all
             other components of form display to user -->
             {% if field.name != 'save_button1' %} {{field.label}}{% endif %} {%
             if field.name != 'save_button1' %} {{field}} {% endif %} {% if
             field.name == 'save_button1' and g.user %} {{field}} {% endif %} {%
             for error in field.errors %} {{error}} {% endfor %}
-          </p>
+          </div>
           {% endfor %}
           <button
             class="form-button"
@@ -80,24 +80,19 @@
           <form class="group-form" method="POST">
             {{group_form.hidden_tag()}} {% for field in group_form if
             field.widget.input_type != 'hidden' %}
-            <p class="group-form-label">
+            <div class="group-form-label">
               {{field}} {% for error in field.errors %} {{error}} {% endfor %}
-            </p>
+            </div>
             {% endfor %}
           </form>
-          <ul class="group-name">
-            <li>test</li>
-            {% for character in characters %}
-            <li>{{character.name}}</li>
-            {% endfor %}
-          </ul>
+          <ul class="group-name"></ul>
           {% endif %}
         </div>
       </div>
       {% endblock %}
     </main>
-    <script src="https://unpkg.com/axios/dist/axios.js"></script>
 
+    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
     <script src="/static/domElements.js"></script>
 
     <script src="/static/functions.js"></script>

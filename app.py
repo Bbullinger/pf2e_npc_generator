@@ -36,7 +36,7 @@ def logout():
 
 
 @app.route("/", methods=["GET", "POST"])
-def home_page():
+def main_page():
     """Present character form to user"""
     npc_form = NpcGenerator()
     group_form = GroupForm()
@@ -131,8 +131,19 @@ def user_sign_in():
         return render_template("login.html", form=form)
 
 
-######Retrieve info from the API###########
+######Retrieve info from the API and Database###########
 @app.route("/<endpoint>")
 def randomAPI(endpoint):
+    if not g.user:
+        flash("Please log in")
+        return redirect("/")
     response = requests.get(BASE_URL + endpoint, headers={"Authorization": API_KEY})
     return response.text
+
+@app.route("/get_characters")
+def retrieveDatabase():
+    if not g.user:
+        flash("Please log in")
+        return redirect("/")
+    characters = Character.query.filter(Character.user_id == g.user.id).all()
+    serialized_characters = characters.serialize_character()

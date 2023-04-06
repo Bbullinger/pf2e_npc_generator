@@ -1,125 +1,126 @@
 header {
-    background-color:tan;
-    display: flex;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    height: 40px;
-    align-items: center;
-    box-shadow: 0 0 25px 0 black;
+  background-color: tan;
+  display: flex;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  height: 40px;
+  align-items: center;
+  box-shadow: 0 0 25px 0 black;
 }
-header *{
-    display:inline;
+header * {
+  display: inline;
 }
 header li {
-    margin: 20px;
+  margin: 20px;
 }
-header li, header li a{
-    color: gold;
-    text-decoration: none;
+header li,
+header li a {
+  color: gold;
+  text-decoration: none;
 }
 /* html {
     height:100%;
 } */
 body {
-    font-family: sans-serif;
-    /* height:100%; */
-    margin-top: 80px;
-    padding: 30px;
-    background-color: rgb(254, 224, 183);
+  font-family: sans-serif;
+  /* height:100%; */
+  margin-top: 80px;
+  padding: 30px;
+  background-color: rgb(254, 224, 183);
 }
-h1 {
-    color:rgb(150, 49, 24);
-    text-align: center;
+h1,
+h2 {
+  color: rgb(150, 49, 24);
+  text-align: center;
+  font-family: Palantino;
+  /* font-weight: bold; */
 }
 /* CHARACTER GENERATOR FORM */
 .npc-form-container {
-    
-    height: 250px;
-    width:915px;
-    margin: auto;
-    
-    
+  height: 250px;
+  width: 915px;
+  margin: auto;
+  font-family: Georgia, "Times New Roman", Times, serif;
 }
 .npc-form {
-    height:100%;
-    margin-top:50px;
-    display: grid;
-    grid-template-columns: 300px 300px 300px;
-    justify-items:end;
-    align-items:center;
-    background-color:  rgb(214, 185, 142);
+  height: 100%;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 300px 300px 300px;
+  justify-items: end;
+  align-items: center;
+  background-color: rgb(214, 185, 142);
 
-    border-radius: 5px;
-    box-shadow: 3px 3px 5px 0 black;
+  border-radius: 5px;
+  box-shadow: 3px 3px 5px 0 black;
 }
 
-
-#save_button1 {
-    width:125px;
-}
+#save_button1,
 #generate-character {
-    grid-row: 5/5;
-    grid-column: 2/2;
-    width:125px;
-
+  width: 125px;
+  font-family: baskerville, serif;
+  font-weight: bold;
 }
-
+#save_button1:hover,
+#generate-character:hover {
+  cursor: pointer;
+  background-color: gray;
+}
 .npc-form-label {
-    color:rgb(150, 49, 24);
+  color: rgb(150, 49, 24);
 
-    font-weight:bold;
+  font-weight: bold;
 }
 #character-name {
-    text-align:center;
+  text-align: center;
 }
 
 .npc-stats-display {
-    /* margin-top: 100px; */
-    align-items:center;
+  /* margin-top: 100px; */
+  align-items: center;
 }
-.npc-form input {
-    height: 1.5rem;
-    border-radius: 5px;
-
+.npc-form input,
+#generate-character {
+  height: 1.5rem;
+  border-radius: 5px;
 }
 
 /* display of character name and Groups divs */
 .npc-group-display {
-   display: grid;
-   grid-template-columns: 600px 300px;
-    width: 915px;
-    margin:auto;
-
+  display: grid;
+  grid-template-columns: 600px 300px;
+  width: 915px;
+  margin: auto;
 }
 
-.npc-display, .group-display {
-    margin-top: 100px;
-
+.npc-display,
+.group-display {
+  margin-top: 100px;
 }
 .npc-stats-display {
-    height:250px;
+  height: 250px;
 
-    display: grid;
-    grid-template-columns: 200px 200px 200px;
-    grid-template-rows: repeat(4,62.5px);
-    justify-items:center;
-    align-items:center;
+  display: grid;
+  grid-template-columns: 200px 200px 200px;
+  grid-template-rows: repeat(4, 62.5px);
+  justify-items: center;
+  align-items: center;
 }
 
 .group-display {
-
-    height:297px;
+  height: 297px;
 }
+
 .group-form-label {
-    display:inline;
+  display: inline;
 }
 #groups-title {
-    text-align:center;
+  text-align: center;
 }
 .npc-stats-display span {
-    color:rgb(150, 49, 24);
+  color: rgb(150, 49, 24);
 
-    font-weight:bold;
+  font-weight: bold;
 }

@@ -25,7 +25,7 @@
     {% for category, message in get_flashed_messages(with_categories=True) %}
     <div class="flash-message">{{ message }}</div>
     {% endfor %} {% block content %}
-    <main data-page="home">
+    <main data-page="home" {% if g.user %} data-loggedIn="true" {% endif %}>
       <h1>Randomly Generate a Pathfinder 2e character!</h1>
 
       <div class="npc-form-container">
@@ -41,38 +41,21 @@
             for error in field.errors %} {{error}} {% endfor %}
           </div>
           {% endfor %}
-          <button
-            class="form-button"
-            id="generate-character"
-            type="reset|button"
-          >
-            Generate Character
-          </button>
+          <div class="npc-form-label" id="generate-character-container">
+            <button
+              class="form-button"
+              id="generate-character"
+              type="reset|button"
+            >
+              Randomize!
+            </button>
+          </div>
         </form>
-
-        <!-- <form class="save-form" action="/">
-          <button class="save-submit" action=""
-        </form> -->
       </div>
       <div class="npc-group-display">
         <div class="npc-display">
           <h2 id="character-name">Character Name</h2>
           <div class="npc-stats-display">
-            <!-- <ul class="npc-display-stats" id="main-details">
-              <li>Background</li>
-              <li>Ancestry</li>
-              <li>Char_class</li>
-              <li>Level</li>
-            </ul>
-            <ul class="npc-display-stats" id="stats">
-              <li>Str</li>
-              <li>Con</li>
-              <li>Wis</li>
-              <li>Dex</li>
-              <li>Int</li>
-              <li>Cha</li>
-            </ul>
-            <ul class="npc-display-stats" id="feats"></ul> -->
             <span id="display-background">Background</span>
             <span id="display-ancestry">Ancestry</span>
             <span id="display-char_class">Char_class</span>
@@ -86,7 +69,7 @@
           </div>
         </div>
         <div class="group-display">
-          <h3 id="groups-title">Groups</h3>
+          <h2 id="groups-title">Groups</h2>
           {% if g.user %}
           <form class="group-form" method="POST">
             {{group_form.hidden_tag()}} {% for field in group_form if

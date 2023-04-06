@@ -65,3 +65,8 @@ async function randomizeNpcForm() {
   }
   generatorLevel.value = randomNumber(20);
 }
+
+function createCharLink(character) {
+  const span = document.createElement("span");
+  span.setAttribute("class", "char-link");
+}

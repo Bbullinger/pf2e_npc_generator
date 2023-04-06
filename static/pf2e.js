@@ -8,3 +8,7 @@ if (main.dataset.page === "home") {
   });
   generateCharacter.addEventListener("click", randomizeNpcForm);
 }
+
+if (main.dataset.loggedIn === "true") {
+  const response = await axios.get(`${BASE_URL}get_characters`);
+}

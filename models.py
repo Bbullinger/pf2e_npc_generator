@@ -96,8 +96,6 @@ class Character(db.Model):
             "dex": self.dex,
             "intel": self.intel,
             "cha": self.cha,
-            # "ancestry_feats": self.ancestry_feats,
-            # "class_feats": self.class_feats,
             "user_id": self.user_id,
         }
 
@@ -117,3 +115,10 @@ class Group(db.Model):
 
     users = db.relationship(User, backref="groups")
     characters = db.relationship(Character, backref="groups")
+
+    def serialize_group(self):
+        return {
+            "group_name": self.group_name,
+            "character_id": self.character_id,
+            "user_id": self.user_id,
+        }

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="/static/base.css" />
+    <link rel="stylesheet" href="/static/grid-organizing.css" />
     <title>Pathfinder 2e NPC Generator</title>
   </head>
   <body>
@@ -57,7 +58,7 @@
         <div class="npc-display">
           <h2 id="character-name">Character Name</h2>
           <div class="npc-stats-display">
-            <ul class="npc-display-stats" id="main-details">
+            <!-- <ul class="npc-display-stats" id="main-details">
               <li>Background</li>
               <li>Ancestry</li>
               <li>Char_class</li>
@@ -71,11 +72,21 @@
               <li>Int</li>
               <li>Cha</li>
             </ul>
-            <ul class="npc-display-stats" id="feats"></ul>
+            <ul class="npc-display-stats" id="feats"></ul> -->
+            <span id="display-background">Background</span>
+            <span id="display-ancestry">Ancestry</span>
+            <span id="display-char_class">Char_class</span>
+            <span id="display-level">Level</span>
+            <span id="display-str">Str</span>
+            <span id="display-con">Con</span>
+            <span id="display-wis">Wis</span>
+            <span id="display-dex">Dex</span>
+            <span id="display-int">Int</span>
+            <span id="display-cha">Cha</span>
           </div>
         </div>
         <div class="group-display">
-          <h3>Groups</h3>
+          <h3 id="groups-title">Groups</h3>
           {% if g.user %}
           <form class="group-form" method="POST">
             {{group_form.hidden_tag()}} {% for field in group_form if

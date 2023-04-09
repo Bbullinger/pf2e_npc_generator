@@ -13,7 +13,6 @@ async function randomAPI(endpoint) {
   const response = await axios.get(`${BASE_URL}/${endpoint}`);
   //Grab num of results, find a random number from 1 - numResults, and return endpoint result
   //index of the random number in string format
-
   const numResults = response.data.results.length;
   return response.data.results[randomNumber(numResults)].name;
   // const numResults = response.length;
@@ -69,4 +68,5 @@ async function randomizeNpcForm() {
 function createCharLink(character) {
   const span = document.createElement("span");
   span.setAttribute("class", "char-link");
+  const link = document.createElement("a");
 }

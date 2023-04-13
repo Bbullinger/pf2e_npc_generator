@@ -1,5 +1,3 @@
-const BASE_URL = "http://localhost:5000/";
-
 // preventDefault does not work inside an async function,
 // Second eventlistener needed to prevent auto refresh
 if (main.dataset.page === "home") {
@@ -9,6 +7,6 @@ if (main.dataset.page === "home") {
   generateCharacter.addEventListener("click", randomizeNpcForm);
 }
 
-// if (main.dataset.loggedIn === "true") {
-//   const response = await axios.get(`${BASE_URL}get_characters`);
-// }
+if (main.dataset.loggedin === "true") {
+  displayGroups();
+}

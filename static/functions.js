@@ -1,3 +1,5 @@
+const BASE_URL = "http://localhost:5000/";
+
 function selectFormElement(element) {
   return document.querySelector(element);
 }
@@ -59,8 +61,8 @@ async function randomizeNpcForm() {
     generatorCha,
   ];
   for (let formInput of formStatsValues) {
-    //Want the values to be between 8 and 14. Base set at 8, function adds 0 to 6
-    formInput.value = randomNumber(6) + 8;
+    //Want the values to be between 8 and 16. Base set at 8, function adds 0 to 6
+    formInput.value = randomNumber(6) + 10;
   }
   generatorLevel.value = randomNumber(20);
 }
@@ -68,5 +70,57 @@ async function randomizeNpcForm() {
 function createCharLink(character) {
   const span = document.createElement("span");
   span.setAttribute("class", "char-link");
-  const link = document.createElement("a");
+}
+
+async function getTableDB(apiRoute) {
+  const response = await axios.get(`${BASE_URL}${apiRoute}`);
+  return response.data;
+}
+
+async function getDB(tableName) {
+  const tableData = await getTableDB(`/get_${tableName}`);
+  return tableData;
+}
+function displayChar(characterObj) {
+  displayName.innerText = characterObj.name;
+  displayBackground.innerText = characterObj.background;
+  displayAncestry.innerText = characterObj.ancestry;
+  displayClass.innerText = characterObj.char_class;
+
+  displayLevel.innerText = characterObj.level;
+
+  displayStr.innerText = characterObj.strength;
+  displayCon.innerText = characterObj.con;
+  displayWis.innerText = characterObj.wis;
+  displayDex.innerText = characterObj.dex;
+  displayInt.innerText = characterObj.intel;
+  displayCha.innerText = characterObj.cha;
+}
+
+//Grabs all groups created by user, which were stored in DB, and displays under group form.
+async function displayGroups() {
+  const groups = await getDB("groups");
+
+  for (let group of groups) {
+    //Create an li element to display each group, and add to group name list
+    const newLi = document.createElement("li");
+    newLi.setAttribute("class", "group-name");
+    newLi.dataset.name = group.group_name;
+    newLi.innerText = group.group_name;
+    groupName.append(newLi);
+
+    //add a second list to group, used to display characters of that group
+    const newUl = document.createElement("ul");
+    newUl.setAttribute("class", "character-list");
+    newUl.setAttribute("id", `${group.group_name}-characters`);
+    newLi.append(newUl);
+
+    //Add another li to be used to add characters to this group
+    const addForm = document.createElement("form");
+    newUl.append(addForm);
+    newLi.setAttribute("class", "group-add-character");
+    newLi.setAttribute("id", `${group.group_name}-add-character`);
+    newLi.innerText = "Click to add character";
+    newUl.append(newLi);
+  }
 }

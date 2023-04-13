@@ -12,10 +12,12 @@
     <header class="navbar-container">
       <nav class="nav-bar">
         <ul>
+          <li><a href="/">Home</a></li>
           {% if g.user %}
           <li>Welcome, {{g.user.username}}!</li>
           <li><a href="/logout">Log Out</a></li>
           {% else %}
+
           <li><a href="/login">Log In</a></li>
           <li><a href="/signup">Sign Up</a></li>
           {% endif %}
@@ -25,7 +27,7 @@
     {% for category, message in get_flashed_messages(with_categories=True) %}
     <div class="flash-message">{{ message }}</div>
     {% endfor %} {% block content %}
-    <main data-page="home" {% if g.user %} data-loggedIn="true" {% endif %}>
+    <main data-page="home" {% if g.user %} data-loggedin="true" {% endif %}>
       <h1>Randomly Generate a Pathfinder 2e character!</h1>
 
       <div class="npc-form-container">
@@ -54,23 +56,25 @@
       </div>
       <div class="npc-group-display">
         <div class="npc-display">
-          <h2 id="character-name">Character Name</h2>
+          <h2 id="display-name">Character Name</h2>
           <div class="npc-stats-display">
             <span id="display-background">Background</span>
             <span id="display-ancestry">Ancestry</span>
             <span id="display-char_class">Char_class</span>
             <span id="display-level">Level</span>
-            <span id="display-str">Str</span>
+            <span id="display-strength">Str</span>
             <span id="display-con">Con</span>
             <span id="display-wis">Wis</span>
             <span id="display-dex">Dex</span>
-            <span id="display-int">Int</span>
+            <span id="display-intel">Int</span>
             <span id="display-cha">Cha</span>
           </div>
         </div>
         <div class="group-display">
           <h2 id="groups-title">Groups</h2>
-          {% if g.user %}
+          {% if not g.user %}
+          <h4>Please log in to save character groups.</h4>
+          {% endif %} {% if g.user %}
           <form class="group-form" method="POST">
             {{group_form.hidden_tag()}} {% for field in group_form if
             field.widget.input_type != 'hidden' %}
@@ -79,7 +83,7 @@
             </div>
             {% endfor %}
           </form>
-          <ul class="group-name"></ul>
+          <ul id="group-name-list"></ul>
           {% endif %}
         </div>
       </div>

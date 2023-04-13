@@ -11,6 +11,7 @@ header {
 }
 header * {
   display: inline;
+  right: 40px;
 }
 header li {
   margin: 20px;
@@ -29,13 +30,17 @@ body {
   margin-top: 80px;
   padding: 30px;
   background-color: rgb(254, 224, 183);
+
 }
 h1,
 h2 {
   color: rgb(150, 49, 24);
   text-align: center;
   font-family: Palantino;
-  /* font-weight: bold; */
+ 
+}
+.flash-message {
+  text-align:center;
 }
 /* CHARACTER GENERATOR FORM */
 .npc-form-container {
@@ -66,7 +71,7 @@ h2 {
 #save_button1:hover,
 #generate-character:hover {
   cursor: pointer;
-  background-color: gray;
+  background-color: rgb(175, 174, 174);
 }
 .npc-form-label {
   color: rgb(150, 49, 24);
@@ -82,7 +87,7 @@ h2 {
   align-items: center;
 }
 .npc-form input,
-#generate-character {
+#generate-character, .form-input {
   height: 1.5rem;
   border-radius: 5px;
 }
@@ -123,4 +128,9 @@ h2 {
   color: rgb(150, 49, 24);
 
   font-weight: bold;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
 }

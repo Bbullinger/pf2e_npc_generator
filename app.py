@@ -137,11 +137,27 @@ def randomAPI(endpoint):
     response = requests.get(BASE_URL + endpoint, headers={"Authorization": API_KEY})
     return response.text
 
+
 @app.route("/get_characters")
-def retrieveDatabase():
+def getDatabaseCharacters():
     if not g.user:
         flash("Please log in")
         return redirect("/")
     characters = Character.query.filter(Character.user_id == g.user.id).all()
-    serialized_characters = characters.serialize_character()
-    return response.text
+    serialized_characters = []
+    for character in characters:
+        serialized_characters.append(character.serialize_character())
+    return serialized_characters
+
+
+@app.route("/get_groups")
+def getDatabaseGroups():
+    if not g.user:
+        flash("Please log in")
+        return redirect("/")
+    groups = Group.query.filter(Group.user_id == g.user.id).all()
+    serialized_groups = []
+    for group in groups:
+        serialized_groups.append(group.serialize_group())
+    print("test")
+    return serialized_groups
